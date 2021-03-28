@@ -60,6 +60,7 @@ config :gameoflife, GameoflifeWeb.Endpoint,
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
+      ~r"lib/gameoflife/game/.*(ex)$",
       ~r"lib/gameoflife_web/(live|views|components)/.*(ex)$",
       ~r"lib/gameoflife_web/templates/.*(eex)$"
     ]
