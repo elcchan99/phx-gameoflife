@@ -27,12 +27,9 @@ defmodule GameoflifeWeb.Components.App do
 
   def handle_event(
         "command",
-        %{"command" => "step"} = params,
+        %{"command" => "step"} = _params,
         %{assigns: %{board: board}} = socket
       ) do
-    IO.inspect(params, label: "params")
-    IO.inspect(board, label: "board")
-    IO.puts("Step")
-    {:noreply, socket}
+    {:noreply, socket |> assign(board: BoardStruct.next(board))}
   end
 end
