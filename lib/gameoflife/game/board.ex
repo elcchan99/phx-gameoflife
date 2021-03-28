@@ -1,5 +1,6 @@
 defmodule Gameoflife.Game.Board do
   alias Gameoflife.Game.Board
+  alias Gameoflife.Game.Cell
 
   defstruct width: 10, height: 20, state: nil
 
@@ -9,7 +10,9 @@ defmodule Gameoflife.Game.Board do
     %Board{width: width, height: height, state: initial_board_state(width * height)}
   end
 
-  defp initial_board_state(size), do: Enum.to_list(0..(size - 1))
+  defp initial_board_state(size) do
+    0..(size - 1) |> Enum.map(fn _ -> Cell.new() end) |> Enum.to_list()
+  end
 
   def neighbours_of(%Board{width: w, height: h}, i) do
     t = neighbour_top(w, h, i)
