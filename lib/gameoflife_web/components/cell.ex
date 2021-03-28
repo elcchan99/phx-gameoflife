@@ -19,6 +19,6 @@ defmodule GameoflifeWeb.Components.Cell do
     """
   end
 
-  def render_cell_state(%CellStruct{state: :live}), do: "live"
-  def render_cell_state(%CellStruct{state: _}), do: "dead"
+  defp render_cell_state(%CellStruct{state: :live}), do: "live"
+  defp render_cell_state(%CellStruct{state: _}), do: "dead"
 end

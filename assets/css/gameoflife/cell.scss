@@ -13,4 +13,11 @@
   &:first-child {
     border-left-width: 0;
   }
+
+  &.live {
+    background: black;
+  }
+  &.dead {
+    background: transparent;
+  }
 }
