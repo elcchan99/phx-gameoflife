@@ -17,7 +17,8 @@ defmodule GameoflifeWeb.Router do
   scope "/", GameoflifeWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", AppLive, :index
+    live "/live", PageLive, :index
   end
 
   # Other scopes may use custom stacks.
