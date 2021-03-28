@@ -24,12 +24,6 @@ defmodule GameoflifeWeb.Components.App do
   end
 
   def mount(socket) do
-    IO.inspect(socket.assigns, label: "assign")
-
-    {
-      :ok,
-      socket
-      |> assign(board_state: Enum.to_list(0..(@width * @height - 1)))
-    }
+    {:ok, assign(socket, board_state: initial_board_state())}
   end
 end
