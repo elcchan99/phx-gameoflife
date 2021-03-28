@@ -39,6 +39,8 @@ defmodule GameoflifeWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
+
+      import Surface
     end
   end
 
@@ -48,6 +50,8 @@ defmodule GameoflifeWeb do
         layout: {GameoflifeWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
+
+      import Surface
     end
   end
 
@@ -56,6 +60,8 @@ defmodule GameoflifeWeb do
       use Phoenix.LiveComponent
 
       unquote(view_helpers())
+
+      import Surface
     end
   end
 
