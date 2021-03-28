@@ -3,8 +3,8 @@ defmodule GameoflifeWeb.Components.App do
 
   alias GameoflifeWeb.Components.Board
 
-  @width 100
-  @height 100
+  @width 120
+  @height 60
 
   prop width, :number, default: @width
   prop height, :number, default: @height
