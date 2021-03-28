@@ -1,6 +1,8 @@
 defmodule GameoflifeWeb.Components.Board do
   use Surface.Component
 
+  alias GameoflifeWeb.Components.Cell
+
   @doc "board width"
   prop width, :number, required: true
 
@@ -14,9 +16,7 @@ defmodule GameoflifeWeb.Components.Board do
     ~H"""
       <div class="board">
         <div class="row row-{{row_index}}" :for={{ {row, row_index} <- (Enum.chunk_every(@state, @width) |> Enum.with_index()) }}>
-          <div class="cell col-{{col_index}}" :for={{ {cell, col_index} <- Enum.with_index(row)}}>
-            {{cell}}
-          </div>
+          <Cell state={{row}}/>
         </div>
       </div>
     """
