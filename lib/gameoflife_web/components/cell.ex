@@ -14,11 +14,11 @@ defmodule GameoflifeWeb.Components.Cell do
 
   def render(assigns) do
     ~H"""
-    <div class="cell {{@class}} {{render_cell_state(@state)}}">
+    <div class="cell {{@class}} {{render_cell_state(CellStruct.get_state(@state))}}">
     </div>
     """
   end
 
-  defp render_cell_state(%CellStruct{state: :live}), do: "live"
-  defp render_cell_state(%CellStruct{state: _}), do: "dead"
+  defp render_cell_state(:live), do: "live"
+  defp render_cell_state(_), do: "dead"
 end
