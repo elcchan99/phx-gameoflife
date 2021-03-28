@@ -1,0 +1,11 @@
+@import "vars.scss";
+
+#gameoflife {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  @import "board.scss";
+  @import "cell.scss";
+}

@@ -5,7 +5,7 @@ defmodule GameoflifeWeb.AppLive do
 
   def render(assigns) do
     ~H"""
-    <App id="root"/>
+    <App id="gameoflife"/>
     """
   end
 end
