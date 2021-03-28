@@ -5,8 +5,8 @@ defmodule GameoflifeWeb.Components.Cell do
 
   def render(assigns) do
     ~H"""
-    <div class="cell col-{{col_index}}" :for={{ {cell, col_index} <- Enum.with_index(@state)}}>
-      {{cell}}
+    <div class="cell col-{{col_index}}" :for={{ {_, col_index} <- Enum.with_index(@state)}}>
+
     </div>
     """
   end
