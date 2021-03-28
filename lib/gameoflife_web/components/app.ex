@@ -6,8 +6,8 @@ defmodule GameoflifeWeb.Components.App do
   alias GameoflifeWeb.Components.Board
   alias GameoflifeWeb.Components.CommandPanel
 
-  @width 120
-  @height 60
+  @width 60
+  @height 30
 
   prop width, :number, default: @width
   prop height, :number, default: @height
