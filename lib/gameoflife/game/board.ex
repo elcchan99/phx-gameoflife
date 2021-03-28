@@ -1,9 +1,15 @@
 defmodule Gameoflife.Game.Board do
   alias Gameoflife.Game.Board
 
-  defstruct width: 10, height: 20
+  defstruct width: 10, height: 20, state: nil
 
   defguard is_inbound(i, size) when i >= 0 and i < size
+
+  def new(width, height) do
+    %Board{width: width, height: height, state: initial_board_state(width * height)}
+  end
+
+  defp initial_board_state(size), do: Enum.to_list(0..(size - 1))
 
   def neighbours_of(%Board{width: w, height: h}, i) do
     t = neighbour_top(w, h, i)
