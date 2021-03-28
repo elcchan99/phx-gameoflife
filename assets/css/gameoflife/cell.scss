@@ -3,8 +3,14 @@
   justify-content: center;
   align-items: center;
 
-  width: 24px;
-  height: 24px;
+  width: 1rem;
+  height: 1rem;
 
-  border: 1px solid black;
+  // border: 1px solid black;
+  border-top: 1px solid $board-layout-color;
+  border-left: 1px solid $board-layout-color;
+
+  &:first-child {
+    border-left-width: 0;
+  }
 }

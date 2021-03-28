@@ -1,7 +1,11 @@
 .board {
-  border: 1px solid black;
+  border: 2px solid $board-layout-color;
 
   .row {
     margin: unset;
+
+    &:first-child .cell {
+      border-top-width: 0;
+    }
   }
 }
