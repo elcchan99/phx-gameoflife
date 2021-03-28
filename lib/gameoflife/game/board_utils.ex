@@ -1,7 +1,9 @@
 defmodule Gameoflife.Game.BoardUtils do
+  use Memoize
+
   defguard is_inbound(i, size) when i >= 0 and i < size
 
-  def neighbours_of(w, h, i) do
+  defmemo neighbours_of(w, h, i) do
     t = neighbour_top(w, h, i)
     b = neighbour_bottom(w, h, i)
     l = neighbour_left(w, h, i)
