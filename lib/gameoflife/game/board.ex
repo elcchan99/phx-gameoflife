@@ -8,11 +8,42 @@ defmodule Gameoflife.Game.Board do
 
   def new(width, height) do
     %Board{width: width, height: height, state: initial_board_state(width * height)}
+    |> set_horizontal_line(div(height, 2))
   end
 
   defp initial_board_state(size) do
-    0..(size - 1) |> Enum.map(fn _ -> Cell.new() end) |> Enum.to_list()
+    0..(size - 1)
+    |> Enum.map(fn _ -> Cell.new() end)
+    |> Enum.to_list()
   end
+
+  defp set_horizontal_line(%{width: width, state: state} = board, row_index) do
+    new_state =
+      0..(width - 1)
+      |> Enum.map(&(row_index * width + &1))
+      |> Enum.reduce(state, fn i, acc -> set_cell_state(acc, i, :live) end)
+
+    %Board{board | state: new_state}
+  end
+
+  defp set_cell_state(board_state, index, value) do
+    new_cell =
+      Enum.at(board_state, index)
+      |> Cell.set_state(value)
+
+    board_state |> List.replace_at(index, new_cell)
+  end
+
+  # defp set_cell_state(a, b, c) do
+  #   IO.inspect(a, label: "board")
+  #   IO.inspect(b, label: "index")
+  #   IO.inspect(c, label: "state")
+  #   a
+  # end
+
+  # def next(%Board{state: state}=board) do
+  #   new_state = Enum.map()
+  # end
 
   def neighbours_of(%Board{width: w, height: h}, i) do
     t = neighbour_top(w, h, i)

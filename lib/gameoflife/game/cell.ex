@@ -4,7 +4,10 @@ defmodule Gameoflife.Game.Cell do
   defstruct state: :dead
 
   def new(state), do: %Cell{state: state}
+
   def new(), do: %Cell{}
+
+  def set_state(cell, state), do: %Cell{cell | state: state}
 
   def next(%Cell{state: state} = cell, neighbours) do
     %Cell{cell | state: next_state(state, count_state(neighbours, :live))}
