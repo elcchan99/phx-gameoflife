@@ -1,4 +1,4 @@
-defmodule Gameoflife.Components.App do
+defmodule GameoflifeWeb.Components.App do
   use Surface.LiveComponent
 
   def render(assigns) do
