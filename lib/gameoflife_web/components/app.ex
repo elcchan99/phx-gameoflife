@@ -26,8 +26,8 @@ defmodule GameoflifeWeb.Components.App do
   @seed_map %{
     "horizontal" => {HorizontalLineSeed, "Horizontal"},
     "block" => {StillLifeSeed.Block, "Block"},
-    "bee-hive" => {StillLifeSeed.BeeHive, "Bee Hive"}
-    # "loaf" => {&BoardSeed.StillLife.loaf_at_center/2, "Loaf"},
+    "bee-hive" => {StillLifeSeed.BeeHive, "Bee Hive"},
+    "loaf" => {StillLifeSeed.Loaf, "Loaf"}
     # "boat" => {&BoardSeed.StillLife.boat_at_center/2, "Boat"},
     # "tub" => {&BoardSeed.StillLife.tub_at_center/2, "Tub"}
   }
