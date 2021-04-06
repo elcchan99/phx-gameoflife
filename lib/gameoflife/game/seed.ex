@@ -27,11 +27,8 @@ defmodule Gameoflife.Game.Seed do
     alias Utils
 
     def block_at_middle(state, width, height) do
-      index =
-        (Utils.calc_middle(height) * width + Utils.calc_middle(height))
-        |> IO.inspect(label: "block_at_index")
-
-      state |> block_at(width, height, index)
+      state
+      |> block_at(width, height, Utils.calc_middle(height) * width + Utils.calc_middle(height))
     end
 
     def block_at(state, w, h, top_left_index) do
