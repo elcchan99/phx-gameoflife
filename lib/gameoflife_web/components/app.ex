@@ -19,10 +19,14 @@ defmodule GameoflifeWeb.Components.App do
     ~H"""
       <div id="gameoflife">
         <h1>Game of Life</h1>
-        <InfoPanel generation={{@board.generation}}/>
-        <CommandPanel
-          on_command_click="command"/>
-        <Board value={{@board}}/>
+        <div class="board-wrapper center">
+          <Board value={{@board}}/>
+        </div>
+        <div class="sider">
+          <InfoPanel generation={{@board.generation}}/>
+          <CommandPanel
+            on_command_click="command"/>
+        </div>
       </div>
     """
   end

@@ -6,7 +6,7 @@ defmodule GameoflifeWeb.Components.InfoPanel do
 
   def render(assigns) do
     ~H"""
-      <div class="info">
+      <div class="info-panel">
         <span class="generation">Generation: {{@generation}}</span>
       </div>
     """

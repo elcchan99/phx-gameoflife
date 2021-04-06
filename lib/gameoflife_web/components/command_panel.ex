@@ -7,7 +7,14 @@ defmodule GameoflifeWeb.Components.CommandPanel do
   def render(assigns) do
     ~H"""
       <div class="command-panel">
-        <button :on-click={{ @on_command_click }} phx-value-command="step">Step</button>
+        <div class="start">
+          <h4>Starter</h4>
+          <button :on-click={{ @on_command_click }} phx-value-command="horizontal">Horizontal line</button>
+        </div>
+        <div class="action">
+          <h4>Actions</h4>
+          <button :on-click={{ @on_command_click }} phx-value-command="step">Step</button>
+        </div>
       </div>
     """
   end
