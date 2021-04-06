@@ -28,7 +28,7 @@ defmodule Gameoflife.Game.Seed do
 
     def block_at_middle(state, width, height) do
       state
-      |> block_at(width, height, Utils.calc_middle(height) * width + Utils.calc_middle(height))
+      |> block_at(width, height, Utils.calc_middle(height) * width + Utils.calc_middle(width))
     end
 
     def block_at(state, w, h, top_left_index) do
