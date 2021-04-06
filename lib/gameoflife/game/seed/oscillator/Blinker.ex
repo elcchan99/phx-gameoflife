@@ -1,4 +1,4 @@
-defmodule Gameoflife.Game.Seed.Oscillator.Block do
+defmodule Gameoflife.Game.Seed.Oscillator.Blinker do
   import Gameoflife.Game.BoardUtils
 
   alias Gameoflife.Game.Seeder
