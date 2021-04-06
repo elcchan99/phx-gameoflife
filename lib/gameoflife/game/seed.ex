@@ -7,6 +7,7 @@ defmodule Gameoflife.Game.Seed do
   defmodule Utils do
     def calc_center(n) when rem(n, 2) == 0, do: div(n, 2) - 1
     def calc_center(n), do: div(n, 2)
+    def calc_center_center({w, h}), do: Utils.calc_center(h) * w + Utils.calc_center(w)
 
     def set_indexes_state_value(state, indexes, value) do
       indexes |> Enum.reduce(state, fn i, acc -> Map.put(acc, i, value) end)
@@ -28,9 +29,9 @@ defmodule Gameoflife.Game.Seed do
   defmodule StillLife do
     alias Utils
 
-    def block_at_center(state, {w, h} = dimension) do
+    def block_at_center(state, dimension) do
       state
-      |> block_at(dimension, Utils.calc_center(h) * w + Utils.calc_center(w))
+      |> block_at(dimension, Utils.calc_center_center(dimension))
     end
 
     def block_at(state, d, top_left_index) do
