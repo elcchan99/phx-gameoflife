@@ -40,7 +40,7 @@ defmodule GameoflifeWeb.Components.App do
 
   def handle_event(
         "command",
-        %{"command" => "step"} = _params,
+        %{"command-group" => "action", "command" => "step"} = _params,
         %{assigns: %{board: board}} = socket
       ) do
     {:noreply, socket |> assign(board: BoardStruct.next(board))}
@@ -48,13 +48,14 @@ defmodule GameoflifeWeb.Components.App do
 
   def handle_event(
         "command",
-        %{"command" => "horizontal"} = _params,
+        %{"command-group" => "seed", "command" => command} = _params,
         %{assigns: %{board: board}} = socket
       ) do
     {:noreply,
      socket
-     |> assign(
-       board: BoardStruct.new(board.width, board.height, &BoardSeed.horizontal_line_at_middle/3)
-     )}
+     |> assign(board: BoardStruct.new(board.width, board.height, seed_fn(command)))}
   end
+
+  defp seed_fn("horizontal"), do: &BoardSeed.horizontal_line_at_middle/3
+  defp seed_fn("block"), do: &BoardSeed.StillLife.block_at_middle/3
 end

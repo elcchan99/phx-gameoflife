@@ -1,3 +1,11 @@
 .command-panel {
   grid-area: command_panel;
+
+  & > div {
+    display: flex;
+    flex-flow: column wrap;
+    h4 {
+      flex: 0 0 100%;
+    }
+  }
 }
