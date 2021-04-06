@@ -30,7 +30,8 @@ defmodule GameoflifeWeb.Components.App do
     "loaf" => {StillLifeSeed.Loaf, "Loaf"},
     "boat" => {StillLifeSeed.Boat, "Boat"},
     "tub" => {StillLifeSeed.Tub, "Tub"},
-    "blinker" => {OscillatorSeed.Blinker, "Blinker"}
+    "blinker" => {OscillatorSeed.Blinker, "Blinker"},
+    "toad" => {OscillatorSeed.Toad, "Toad"}
   }
 
   @seed_btn_cfg @seed_map
