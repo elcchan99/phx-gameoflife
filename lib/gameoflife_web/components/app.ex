@@ -9,7 +9,9 @@ defmodule GameoflifeWeb.Components.App do
   alias GameoflifeWeb.Components.InfoPanel
 
   alias(GameoflifeWeb.Components.ButtonSeed, as: ButtonSeedConfig)
+
   alias Gameoflife.Game.Seeder
+  alias Gameoflife.Game.Seed.HorizontalLine, as: HorizontalLineSeed
   alias Gameoflife.Game.Seed.StillLife, as: StillLifeSeed
 
   @width 60
@@ -22,7 +24,7 @@ defmodule GameoflifeWeb.Components.App do
   data board, :module, default: BoardStruct.new(@width, @height)
 
   @seed_map %{
-    # "horizontal" => {&BoardSeed.horizontal_line_at_center/2, "Horizontal"},
+    "horizontal" => {HorizontalLineSeed, "Horizontal"},
     "block" => {StillLifeSeed.Block, "Block"}
     # "bee-hive" => {&BoardSeed.StillLife.bee_hive_at_center/2, "Bee Hive"},
     # "loaf" => {&BoardSeed.StillLife.loaf_at_center/2, "Loaf"},
