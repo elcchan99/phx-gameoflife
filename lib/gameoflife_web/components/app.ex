@@ -63,5 +63,5 @@ defmodule GameoflifeWeb.Components.App do
      |> assign(board: BoardStruct.new(board.width, board.height, seed_fn(command)))}
   end
 
-  defp seed_fn(key), do: Map.get(@seed_map, key, &BoardSeed.empty/3)
+  defp seed_fn(key), do: Map.get(@seed_map, key, &BoardSeed.empty/2)
 end
