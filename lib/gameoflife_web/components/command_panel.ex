@@ -7,7 +7,7 @@ defmodule GameoflifeWeb.Components.CommandPanel do
   prop on_command_click, :event
 
   @doc "Config of seed buttons"
-  prop seeds, :map
+  prop seeds_config, :list
 
   def render(assigns) do
     ~H"""
@@ -15,9 +15,8 @@ defmodule GameoflifeWeb.Components.CommandPanel do
         <div class="seed">
           <h4>Seeds</h4>
           <ButtonSeed on_click={{ @on_command_click }}
-            :for={{ {seed, name} <- @seeds }}
-            name={{name}}
-            seed={{seed}}/>
+            :for={{ config <- @seeds_config }}
+            config={{config}}/>
         </div>
         <div class="action">
           <h4>Actions</h4>

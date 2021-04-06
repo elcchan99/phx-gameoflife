@@ -8,6 +8,8 @@ defmodule GameoflifeWeb.Components.App do
   alias GameoflifeWeb.Components.CommandPanel
   alias GameoflifeWeb.Components.InfoPanel
 
+  alias(GameoflifeWeb.Components.ButtonSeed, as: ButtonSeedConfig)
+
   @width 60
   @height 30
 
@@ -25,9 +27,12 @@ defmodule GameoflifeWeb.Components.App do
   }
 
   @seed_btn_cfg @seed_map
-                |> Enum.reduce(%{}, fn {key, {_, name}}, acc -> Map.put(acc, key, name) end)
+                |> Enum.reduce([], fn {key, {_, name}}, acc ->
+                  [%ButtonSeedConfig{name: name, seed: key} | acc]
+                end)
+                |> Enum.sort(&(&1.name <= &2.name))
 
-  prop seeds, :map, default: @seed_btn_cfg
+  prop seeds_config, :map, default: @seed_btn_cfg
 
   def render(assigns) do
     ~H"""
@@ -40,7 +45,7 @@ defmodule GameoflifeWeb.Components.App do
           <InfoPanel generation={{@board.generation}}/>
           <CommandPanel
             on_command_click="command"
-            seeds={{@seeds}}/>
+            seeds_config={{@seeds_config}}/>
         </div>
       </div>
     """
