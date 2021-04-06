@@ -29,22 +29,6 @@ defmodule Gameoflife.Game.Seed do
   defmodule StillLife do
     alias Utils
 
-    def block_at_center(state, dimension) do
-      state
-      |> block_at(dimension, Utils.calc_center_center(dimension))
-    end
-
-    def block_at(state, d, top_left_index) do
-      indexes = [
-        top_left_index,
-        right(top_left_index, d),
-        bottom(top_left_index, d),
-        top_left_index |> bottom_right(d)
-      ]
-
-      state |> Utils.set_indexes_state_value(indexes, :live)
-    end
-
     def bee_hive_at_center(state, dimension) do
       center = Utils.calc_center_center(dimension)
       left_most = center |> left(dimension, 1)
@@ -106,6 +90,22 @@ defmodule Gameoflife.Game.Seed do
         center_index |> left(d),
         center_index |> right(d)
       ]
+
+      state |> Utils.set_indexes_state_value(indexes, :live)
+    end
+
+    def boat_at_center(state, dimension) do
+      center = Utils.calc_center_center(dimension)
+      state |> boat_at(dimension, center)
+    end
+
+    def boat_at(state, d, center_index) do
+      indexes =
+        [
+          tub_at(state, d, center_index),
+          center_index |> top_left(d)
+        ]
+        |> List.flatten()
 
       state |> Utils.set_indexes_state_value(indexes, :live)
     end

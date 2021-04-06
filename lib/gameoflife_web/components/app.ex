@@ -9,6 +9,8 @@ defmodule GameoflifeWeb.Components.App do
   alias GameoflifeWeb.Components.InfoPanel
 
   alias(GameoflifeWeb.Components.ButtonSeed, as: ButtonSeedConfig)
+  alias Gameoflife.Game.Seeder
+  alias Gameoflife.Game.Seed.StillLife, as: StillLifeSeed
 
   @width 60
   @height 30
@@ -20,11 +22,12 @@ defmodule GameoflifeWeb.Components.App do
   data board, :module, default: BoardStruct.new(@width, @height)
 
   @seed_map %{
-    "horizontal" => {&BoardSeed.horizontal_line_at_center/2, "Horizontal"},
-    "block" => {&BoardSeed.StillLife.block_at_center/2, "Block"},
-    "bee-hive" => {&BoardSeed.StillLife.bee_hive_at_center/2, "Bee Hive"},
-    "loaf" => {&BoardSeed.StillLife.loaf_at_center/2, "Loaf"},
-    "tub" => {&BoardSeed.StillLife.tub_at_center/2, "Tub"}
+    # "horizontal" => {&BoardSeed.horizontal_line_at_center/2, "Horizontal"},
+    "block" => {StillLifeSeed.Block, "Block"}
+    # "bee-hive" => {&BoardSeed.StillLife.bee_hive_at_center/2, "Bee Hive"},
+    # "loaf" => {&BoardSeed.StillLife.loaf_at_center/2, "Loaf"},
+    # "boat" => {&BoardSeed.StillLife.boat_at_center/2, "Boat"},
+    # "tub" => {&BoardSeed.StillLife.tub_at_center/2, "Tub"}
   }
 
   @seed_btn_cfg @seed_map
@@ -76,7 +79,7 @@ defmodule GameoflifeWeb.Components.App do
   end
 
   defp seed_fn(key) do
-    {func, _} = Map.get(@seed_map, key, {&BoardSeed.empty/2, ""})
-    func
+    {seed, _} = Map.get(@seed_map, key, {&BoardSeed.empty/2, ""})
+    &Seeder.apply(seed, &1, &2)
   end
 end
