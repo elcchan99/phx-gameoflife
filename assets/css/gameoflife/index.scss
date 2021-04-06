@@ -20,6 +20,7 @@
 
   .board-wrapper {
     grid-area: board;
+    min-width: 600px;
   }
   .sider {
     grid-area: sider;

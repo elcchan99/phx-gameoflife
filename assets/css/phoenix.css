@@ -24,6 +24,11 @@ pre{padding: 1em;}
   position: relative;
   width: 100%
 }
+main.container{
+  max-width: unset;
+  display: flex;
+  justify-content: center;
+}
 select {
   width: auto;
 }
