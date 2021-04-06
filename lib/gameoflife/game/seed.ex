@@ -36,9 +36,9 @@ defmodule Gameoflife.Game.Seed do
     def block_at(state, dimension, top_left_index) do
       indexes = [
         top_left_index,
-        neighbour_right(top_left_index, dimension),
-        neighbour_bottom(top_left_index, dimension),
-        top_left_index |> neighbour_bottom(dimension) |> neighbour_right(dimension)
+        right(top_left_index, dimension),
+        bottom(top_left_index, dimension),
+        top_left_index |> bottom(dimension) |> right(dimension)
       ]
 
       state |> Utils.set_indexes_state_value(indexes, :live)
