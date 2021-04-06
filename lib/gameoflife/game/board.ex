@@ -26,18 +26,18 @@ defmodule Gameoflife.Game.Board do
     # count neighbour occurances
     |> Enum.frequencies()
     # filter live neighbours
-    |> Enum.reduce(state, fn {i, count}, acc ->
+    |> Enum.reduce(%{}, fn {i, count}, acc ->
       case Map.get(state, i, :dead) do
         :live ->
           cond do
             count >= 2 and count <= 3 -> Map.put(acc, i, :live)
-            true -> Map.delete(acc, i)
+            true -> acc
           end
 
         :dead ->
           cond do
             count == 3 -> Map.put(acc, i, :live)
-            true -> Map.delete(acc, i)
+            true -> acc
           end
       end
     end)
