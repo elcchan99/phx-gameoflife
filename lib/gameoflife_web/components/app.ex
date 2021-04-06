@@ -20,7 +20,8 @@ defmodule GameoflifeWeb.Components.App do
   @seed_map %{
     "horizontal" => &BoardSeed.horizontal_line_at_center/2,
     "block" => &BoardSeed.StillLife.block_at_center/2,
-    "bee-hive" => &BoardSeed.StillLife.bee_hive_at_center/2
+    "bee-hive" => &BoardSeed.StillLife.bee_hive_at_center/2,
+    "loaf" => &BoardSeed.StillLife.loaf_at_center/2
   }
 
   def render(assigns) do

@@ -14,6 +14,7 @@ defmodule GameoflifeWeb.Components.CommandPanel do
           <ButtonSeed on_click={{ @on_command_click }} name="Horizontal" seed="horizontal"/>
           <ButtonSeed on_click={{ @on_command_click }} name="Block" seed="block"/>
           <ButtonSeed on_click={{ @on_command_click }} name="Bee Hive" seed="bee-hive"/>
+          <ButtonSeed on_click={{ @on_command_click }} name="Loaf" seed="loaf"/>
         </div>
         <div class="action">
           <h4>Actions</h4>

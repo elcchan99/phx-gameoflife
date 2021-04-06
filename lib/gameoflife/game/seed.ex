@@ -70,5 +70,28 @@ defmodule Gameoflife.Game.Seed do
 
       state |> Utils.set_indexes_state_value(indexes, :live)
     end
+
+    def loaf_at_center(state, dimension) do
+      center = Utils.calc_center_center(dimension)
+      left_most = center |> left(dimension, 1)
+      state |> loaf_at(dimension, left_most)
+    end
+
+    def loaf_at(state, d, left_most_index) do
+      indexes = [
+        left_most_index,
+        # top bar
+        left_most_index |> top_right(d),
+        left_most_index |> top_right(d) |> right(d),
+        # right vertical bar
+        left_most_index |> right(d, 3),
+        left_most_index |> right(d, 3) |> bottom(d),
+        # bottom slope
+        left_most_index |> bottom_right(d),
+        left_most_index |> bottom_right(d) |> bottom_right(d)
+      ]
+
+      state |> Utils.set_indexes_state_value(indexes, :live)
+    end
   end
 end
