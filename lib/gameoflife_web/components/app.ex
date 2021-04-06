@@ -28,7 +28,7 @@ defmodule GameoflifeWeb.Components.App do
     "block" => {StillLifeSeed.Block, "Block"},
     "bee-hive" => {StillLifeSeed.BeeHive, "Bee Hive"},
     "loaf" => {StillLifeSeed.Loaf, "Loaf"},
-    # "boat" => {&BoardSeed.StillLife.boat_at_center/2, "Boat"},
+    "boat" => {StillLifeSeed.Boat, "Boat"},
     "tub" => {StillLifeSeed.Tub, "Tub"}
   }
 
