@@ -13,6 +13,7 @@ defmodule GameoflifeWeb.Components.App do
   alias Gameoflife.Game.Seed.HorizontalLine, as: HorizontalLineSeed
   alias Gameoflife.Game.Seed.StillLife, as: StillLifeSeed
   alias Gameoflife.Game.Seed.Oscillator, as: OscillatorSeed
+  alias Gameoflife.Game.Seed.Spaceship, as: SpaceshipSeed
 
   @width 60
   @height 30
@@ -32,7 +33,8 @@ defmodule GameoflifeWeb.Components.App do
     "tub" => StillLifeSeed.Tub,
     "blinker" => OscillatorSeed.Blinker,
     "toad" => OscillatorSeed.Toad,
-    "beacon" => OscillatorSeed.Beacon
+    "beacon" => OscillatorSeed.Beacon,
+    "glider" => SpaceshipSeed.Glider
   }
 
   @seed_btn_cfg @seed_map
