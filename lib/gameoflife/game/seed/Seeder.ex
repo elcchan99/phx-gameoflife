@@ -1,4 +1,6 @@
 defmodule Gameoflife.Game.Seeder do
+  @callback display_name() :: String.t()
+
   @callback default_ref_index(Tuple.t(Number.t(), Number.t())) :: Number.t()
 
   @callback indexes_at(Tuple.t(), Number.t()) :: [Number.t()]

@@ -6,6 +6,9 @@ defmodule Gameoflife.Game.Seed.Oscillator.Toad do
   @behaviour Seeder
 
   @impl Seeder
+  def display_name, do: "Toad"
+
+  @impl Seeder
   def default_ref_index(dimension) do
     calc_center_center(dimension)
     |> bottom_left(dimension)

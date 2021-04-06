@@ -6,6 +6,9 @@ defmodule Gameoflife.Game.Seed.HorizontalLine do
   @behaviour Seeder
 
   @impl Seeder
+  def display_name, do: "Horizontal"
+
+  @impl Seeder
   def default_ref_index({_, h}) do
     calc_center(h)
   end

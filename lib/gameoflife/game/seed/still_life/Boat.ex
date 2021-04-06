@@ -7,6 +7,9 @@ defmodule Gameoflife.Game.Seed.StillLife.Boat do
   @behaviour Seeder
 
   @impl Seeder
+  def display_name, do: "Boat"
+
+  @impl Seeder
   def default_ref_index(dimension) do
     Tub.default_ref_index(dimension)
   end

@@ -6,7 +6,9 @@ defmodule Gameoflife.Game.Seed.Oscillator.Blinker do
   @behaviour Seeder
 
   @impl Seeder
+  def display_name, do: "Blinker"
 
+  @impl Seeder
   def default_ref_index(dimension) do
     calc_center_center(dimension)
   end

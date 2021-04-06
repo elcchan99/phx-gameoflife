@@ -6,6 +6,9 @@ defmodule Gameoflife.Game.Seed.StillLife.Block do
   @behaviour Seeder
 
   @impl Seeder
+  def display_name, do: "Block"
+
+  @impl Seeder
   def default_ref_index(dimension) do
     calc_center_center(dimension)
   end

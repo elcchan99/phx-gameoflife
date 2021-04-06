@@ -24,20 +24,20 @@ defmodule GameoflifeWeb.Components.App do
   data board, :module, default: BoardStruct.new(@width, @height)
 
   @seed_map %{
-    "horizontal" => {HorizontalLineSeed, "Horizontal"},
-    "block" => {StillLifeSeed.Block, "Block"},
-    "bee-hive" => {StillLifeSeed.BeeHive, "Bee Hive"},
-    "loaf" => {StillLifeSeed.Loaf, "Loaf"},
-    "boat" => {StillLifeSeed.Boat, "Boat"},
-    "tub" => {StillLifeSeed.Tub, "Tub"},
-    "blinker" => {OscillatorSeed.Blinker, "Blinker"},
-    "toad" => {OscillatorSeed.Toad, "Toad"},
-    "beacon" => {OscillatorSeed.Beacon, "Beacon"}
+    "horizontal" => HorizontalLineSeed,
+    "block" => StillLifeSeed.Block,
+    "bee-hive" => StillLifeSeed.BeeHive,
+    "loaf" => StillLifeSeed.Loaf,
+    "boat" => StillLifeSeed.Boat,
+    "tub" => StillLifeSeed.Tub,
+    "blinker" => OscillatorSeed.Blinker,
+    "toad" => OscillatorSeed.Toad,
+    "beacon" => OscillatorSeed.Beacon
   }
 
   @seed_btn_cfg @seed_map
-                |> Enum.reduce([], fn {key, {_, name}}, acc ->
-                  [%ButtonSeedConfig{name: name, seed: key} | acc]
+                |> Enum.reduce([], fn {key, seed}, acc ->
+                  [%ButtonSeedConfig{name: seed.display_name(), seed: key} | acc]
                 end)
                 |> Enum.sort(&(&1.name <= &2.name))
 

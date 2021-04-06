@@ -6,6 +6,9 @@ defmodule Gameoflife.Game.Seed.StillLife.Loaf do
   @behaviour Seeder
 
   @impl Seeder
+  def display_name, do: "Loaf"
+
+  @impl Seeder
   def default_ref_index(dimension) do
     calc_center_center(dimension) |> left(dimension, 1)
   end
