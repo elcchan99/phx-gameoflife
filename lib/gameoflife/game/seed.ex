@@ -1,7 +1,7 @@
 defmodule Gameoflife.Game.Seed do
   import Gameoflife.Game.BoardUtils
 
-  def empty(_, _, _), do: empty()
+  def empty(_, _), do: empty()
   def empty(), do: %{}
 
   defmodule Utils do
@@ -13,32 +13,32 @@ defmodule Gameoflife.Game.Seed do
     end
   end
 
-  def horizontal_line_at_center(state, width, height) do
-    mid_row = Utils.calc_center(height)
+  def horizontal_line_at_center(state, {_, h} = dimension) do
+    mid_row = Utils.calc_center(h)
 
     state
-    |> horizontal_line_at(width, mid_row)
+    |> horizontal_line_at(dimension, mid_row)
   end
 
-  def horizontal_line_at(state, width, row_index) do
-    indexes = 0..(width - 1) |> Enum.map(&(row_index * width + &1))
+  def horizontal_line_at(state, {w, _}, row_index) do
+    indexes = 0..(w - 1) |> Enum.map(&(row_index * w + &1))
     state |> Utils.set_indexes_state_value(indexes, :live)
   end
 
   defmodule StillLife do
     alias Utils
 
-    def block_at_center(state, width, height) do
+    def block_at_center(state, {w, h} = dimension) do
       state
-      |> block_at(width, height, Utils.calc_center(height) * width + Utils.calc_center(width))
+      |> block_at(dimension, Utils.calc_center(h) * w + Utils.calc_center(w))
     end
 
-    def block_at(state, w, h, top_left_index) do
+    def block_at(state, dimension, top_left_index) do
       indexes = [
         top_left_index,
-        neighbour_right(w, h, top_left_index),
-        neighbour_bottom(w, h, top_left_index),
-        neighbour_right(w, h, neighbour_bottom(w, h, top_left_index))
+        neighbour_right(top_left_index, dimension),
+        neighbour_bottom(top_left_index, dimension),
+        top_left_index |> neighbour_bottom(dimension) |> neighbour_right(dimension)
       ]
 
       state |> Utils.set_indexes_state_value(indexes, :live)

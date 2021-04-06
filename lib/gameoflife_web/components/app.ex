@@ -18,8 +18,8 @@ defmodule GameoflifeWeb.Components.App do
   data board, :module, default: BoardStruct.new(@width, @height)
 
   @seed_map %{
-    "horizontal" => &BoardSeed.horizontal_line_at_center/3,
-    "block" => &BoardSeed.StillLife.block_at_center/3
+    "horizontal" => &BoardSeed.horizontal_line_at_center/2,
+    "block" => &BoardSeed.StillLife.block_at_center/2
   }
 
   def render(assigns) do

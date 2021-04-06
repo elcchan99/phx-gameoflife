@@ -5,13 +5,13 @@ defmodule Gameoflife.Game.Board do
 
   defstruct width: 10, height: 20, state: nil, generation: 0
 
-  def new(width, height), do: new(width, height, fn x, _, _ -> x end)
+  def new(width, height), do: new(width, height, fn x, _ -> x end)
 
   def new(width, height, seed) do
     %Board{
       width: width,
       height: height,
-      state: Seed.empty() |> seed.(height, width),
+      state: Seed.empty() |> seed.({width, height}),
       generation: 0
     }
   end
@@ -23,7 +23,7 @@ defmodule Gameoflife.Game.Board do
   def next_state(%Board{width: w, height: h}, state) do
     state
     # expand with neighbour indexes
-    |> Enum.flat_map(fn {i, _} -> BoardUtils.neighbours_of(w, h, i) end)
+    |> Enum.flat_map(fn {i, _} -> BoardUtils.neighbours_of(i, {w, h}) end)
     # count neighbour occurances
     |> Enum.frequencies()
     # filter live neighbours
