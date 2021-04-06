@@ -3,7 +3,8 @@
 
   & > div {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: row wrap;
+    column-gap: 8px;
     h4 {
       flex: 0 0 100%;
     }

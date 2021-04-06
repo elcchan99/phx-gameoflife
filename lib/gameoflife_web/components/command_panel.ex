@@ -1,6 +1,8 @@
 defmodule GameoflifeWeb.Components.CommandPanel do
   use Surface.Component
 
+  alias GameoflifeWeb.Components.ButtonSeed
+
   @doc "Triggers on click"
   prop on_command_click, :event
 
@@ -8,15 +10,9 @@ defmodule GameoflifeWeb.Components.CommandPanel do
     ~H"""
       <div class="command-panel">
         <div class="start">
-          <h4>Starter</h4>
-          <button :on-click={{ @on_command_click }}
-            phx-value-command-group="seed"
-            phx-value-command="horizontal">
-            Horizontal line</button>
-          <button :on-click={{ @on_command_click }}
-            phx-value-command-group="seed"
-            phx-value-command="block">
-            Block</button>
+          <h4>Seeds</h4>
+          <ButtonSeed on_click={{ @on_command_click }} name="Horizontal" seed="horizontal"/>
+          <ButtonSeed on_click={{ @on_command_click }} name="Block" seed="block"/>
         </div>
         <div class="action">
           <h4>Actions</h4>
