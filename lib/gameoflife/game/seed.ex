@@ -7,6 +7,10 @@ defmodule Gameoflife.Game.Seed do
   defmodule Utils do
     def calc_center(n) when rem(n, 2) == 0, do: div(n, 2) - 1
     def calc_center(n), do: div(n, 2)
+
+    def set_indexes_state_value(state, indexes, value) do
+      indexes |> Enum.reduce(state, fn i, acc -> Map.put(acc, i, value) end)
+    end
   end
 
   def horizontal_line_at_center(state, width, height) do
@@ -17,9 +21,8 @@ defmodule Gameoflife.Game.Seed do
   end
 
   def horizontal_line_at(state, width, row_index) do
-    0..(width - 1)
-    |> Enum.map(&(row_index * width + &1))
-    |> Enum.reduce(state, fn i, acc -> Map.put(acc, i, :live) end)
+    indexes = 0..(width - 1) |> Enum.map(&(row_index * width + &1))
+    state |> Utils.set_indexes_state_value(indexes, :live)
   end
 
   defmodule StillLife do
@@ -31,13 +34,14 @@ defmodule Gameoflife.Game.Seed do
     end
 
     def block_at(state, w, h, top_left_index) do
-      [
+      indexes = [
         top_left_index,
         BoardUtils.neighbour_right(w, h, top_left_index),
         BoardUtils.neighbour_bottom(w, h, top_left_index),
         BoardUtils.neighbour_right(w, h, BoardUtils.neighbour_bottom(w, h, top_left_index))
       ]
-      |> Enum.reduce(state, fn i, acc -> Map.put(acc, i, :live) end)
+
+      state |> Utils.set_indexes_state_value(indexes, :live)
     end
   end
 end
