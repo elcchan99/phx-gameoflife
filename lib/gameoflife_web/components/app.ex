@@ -5,6 +5,7 @@ defmodule GameoflifeWeb.Components.App do
 
   alias GameoflifeWeb.Components.Board
   alias GameoflifeWeb.Components.CommandPanel
+  alias GameoflifeWeb.Components.InfoPanel
 
   @width 60
   @height 30
@@ -18,6 +19,7 @@ defmodule GameoflifeWeb.Components.App do
     ~H"""
       <div id="gameoflife">
         <h1>Game of Life</h1>
+        <InfoPanel generation={{@board.generation}}/>
         <CommandPanel
           on_command_click="command"/>
         <Board value={{@board}}/>

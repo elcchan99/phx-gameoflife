@@ -3,7 +3,7 @@ defmodule Gameoflife.Game.Board do
   alias Gameoflife.Game.Board
   alias Gameoflife.Game.Seed
 
-  defstruct width: 10, height: 20, state: nil
+  defstruct width: 10, height: 20, state: nil, generation: 0
 
   def new(width, height) do
     mid_row = div(height, 2)
@@ -13,12 +13,13 @@ defmodule Gameoflife.Game.Board do
       height: height,
       # Seed.horizontal_line_at(width, mid_row)
       # Seed.StillLife.block_at(width, 2 + mid_row * width)
-      state: Seed.empty() |> Seed.horizontal_line_at(width, mid_row)
+      state: Seed.empty() |> Seed.horizontal_line_at(width, mid_row),
+      generation: 0
     }
   end
 
-  def next(%Board{state: state} = board) do
-    %Board{board | state: next_state(board, state)}
+  def next(%Board{state: state, generation: generation} = board) do
+    %Board{board | state: next_state(board, state), generation: generation + 1}
   end
 
   def next_state(%Board{width: w, height: h}, state) do
