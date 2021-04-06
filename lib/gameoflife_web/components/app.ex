@@ -86,7 +86,7 @@ defmodule GameoflifeWeb.Components.App do
   defp seed_fn(key) do
     case Map.get(@seed_map, key, nil) do
       nil -> fn _, _ -> %{} end
-      {seed, _} -> &Seeder.apply(seed, &1, &2)
+      seed -> &Seeder.apply(seed, &1, &2)
     end
   end
 end
