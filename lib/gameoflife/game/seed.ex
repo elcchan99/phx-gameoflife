@@ -14,18 +14,6 @@ defmodule Gameoflife.Game.Seed do
     end
   end
 
-  def horizontal_line_at_center(state, {_, h} = dimension) do
-    mid_row = Utils.calc_center(h)
-
-    state
-    |> horizontal_line_at(dimension, mid_row)
-  end
-
-  def horizontal_line_at(state, {w, _}, row_index) do
-    indexes = 0..(w - 1) |> Enum.map(&(row_index * w + &1))
-    state |> Utils.set_indexes_state_value(indexes, :live)
-  end
-
   defmodule StillLife do
     alias Utils
 
