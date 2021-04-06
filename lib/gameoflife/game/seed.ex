@@ -1,5 +1,5 @@
 defmodule Gameoflife.Game.Seed do
-  alias Gameoflife.Game.BoardUtils
+  import Gameoflife.Game.BoardUtils
 
   def empty(_, _, _), do: empty()
   def empty(), do: %{}
@@ -36,9 +36,9 @@ defmodule Gameoflife.Game.Seed do
     def block_at(state, w, h, top_left_index) do
       indexes = [
         top_left_index,
-        BoardUtils.neighbour_right(w, h, top_left_index),
-        BoardUtils.neighbour_bottom(w, h, top_left_index),
-        BoardUtils.neighbour_right(w, h, BoardUtils.neighbour_bottom(w, h, top_left_index))
+        neighbour_right(w, h, top_left_index),
+        neighbour_bottom(w, h, top_left_index),
+        neighbour_right(w, h, neighbour_bottom(w, h, top_left_index))
       ]
 
       state |> Utils.set_indexes_state_value(indexes, :live)
