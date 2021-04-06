@@ -22,26 +22,41 @@ defmodule Gameoflife.Game.BoardUtils do
     |> Enum.filter(&(&1 != nil))
   end
 
-  defmemo(top(i, {w, h}) when is_integer(i) and is_inbound(i - w, w * h), do: i - w)
-  defmemo(top(_, _), do: nil)
-  defmemo(bottom(i, {w, h}) when is_integer(i) and is_inbound(i + w, w * h), do: i + w)
-  defmemo(bottom(_, _), do: nil)
+  defmemo(top(i, d, offset \\ 1))
 
-  defmemo(
-    left(i, {w, h})
-    when is_integer(i) and rem(i, w) != 0 and is_inbound(i - 1, w * h),
-    do: i - 1
+  defmemo(top(i, {w, h}, offset) when is_integer(i) and is_inbound(i - w * offset, w * h),
+    do: i - w * offset
   )
 
-  defmemo(left(_, _), do: nil)
+  defmemo(top(_, _, _), do: nil)
 
-  defmemo(
-    right(i, {w, h})
-    when is_integer(i) and rem(i + 1, w) != 0 and is_inbound(i + 1, w * h),
-    do: i + 1
+  defmemo(bottom(i, d, offset \\ 1))
+
+  defmemo(bottom(i, {w, h}, offset) when is_integer(i) and is_inbound(i + w * offset, w * h),
+    do: i + w * offset
   )
 
-  defmemo(right(_, _), do: nil)
+  defmemo(bottom(_, _, _), do: nil)
+
+  defmemo(left(i, d, offset \\ 1))
+
+  defmemo(
+    left(i, {w, h}, offset)
+    when is_integer(i) and rem(i, w) != 0 and is_inbound(i - offset, w * h),
+    do: i - offset
+  )
+
+  defmemo(left(_, _, _), do: nil)
+
+  defmemo(right(i, d, offset \\ 1))
+
+  defmemo(
+    right(i, {w, h}, offset)
+    when is_integer(i) and rem(i + offset, w) != 0 and is_inbound(i + offset, w * h),
+    do: i + offset
+  )
+
+  defmemo(right(_, _, _), do: nil)
 
   defmemo(top_left(i, d), do: i |> top(d) |> left(d))
   defmemo(top_right(i, d), do: i |> top(d) |> right(d))
