@@ -9,6 +9,7 @@ defmodule Gameoflife.Game.Seeder do
   end
 
   def apply(implementation, state, {_, _} = dimension) do
+    IO.inspect(implementation)
     ref_index = implementation.default_ref_index(dimension)
     apply(implementation, state, dimension, ref_index)
   end

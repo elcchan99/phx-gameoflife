@@ -62,4 +62,8 @@ defmodule Gameoflife.Game.BoardUtils do
   defmemo(top_right(i, d), do: i |> top(d) |> right(d))
   defmemo(bottom_left(i, d), do: i |> bottom(d) |> left(d))
   defmemo(bottom_right(i, d), do: i |> bottom(d) |> right(d))
+
+  def calc_center(n) when rem(n, 2) == 0, do: div(n, 2) - 1
+  def calc_center(n), do: div(n, 2)
+  def calc_center_center({w, h}), do: calc_center(h) * w + calc_center(w)
 end

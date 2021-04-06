@@ -2,7 +2,6 @@ defmodule Gameoflife.Game.Seed.StillLife.Boat do
   import Gameoflife.Game.BoardUtils
 
   alias Gameoflife.Game.Seeder
-  # alias Gameoflife.Game.Seed.Utils
   alias Gameoflife.Game.Seed.StillLife.Tub
 
   @behaviour Seeder

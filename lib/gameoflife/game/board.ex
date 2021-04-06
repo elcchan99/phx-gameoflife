@@ -1,7 +1,6 @@
 defmodule Gameoflife.Game.Board do
   alias Gameoflife.Game.BoardUtils
   alias Gameoflife.Game.Board
-  alias Gameoflife.Game.Seed
 
   defstruct width: 10, height: 20, state: nil, generation: 0
 
@@ -11,7 +10,7 @@ defmodule Gameoflife.Game.Board do
     %Board{
       width: width,
       height: height,
-      state: Seed.empty() |> seed.({width, height}),
+      state: %{} |> seed.({width, height}),
       generation: 0
     }
   end

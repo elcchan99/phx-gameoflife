@@ -2,7 +2,6 @@ defmodule GameoflifeWeb.Components.App do
   use Surface.LiveComponent
 
   alias Gameoflife.Game.Board, as: BoardStruct
-  alias Gameoflife.Game.Seed, as: BoardSeed
 
   alias GameoflifeWeb.Components.Board
   alias GameoflifeWeb.Components.CommandPanel
@@ -81,7 +80,9 @@ defmodule GameoflifeWeb.Components.App do
   end
 
   defp seed_fn(key) do
-    {seed, _} = Map.get(@seed_map, key, {&BoardSeed.empty/2, ""})
-    &Seeder.apply(seed, &1, &2)
+    case Map.get(@seed_map, key, nil) do
+      nil -> fn _, _ -> %{} end
+      {seed, _} -> &Seeder.apply(seed, &1, &2)
+    end
   end
 end

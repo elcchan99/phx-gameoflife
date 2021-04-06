@@ -2,13 +2,12 @@ defmodule Gameoflife.Game.Seed.StillLife.BeeHive do
   import Gameoflife.Game.BoardUtils
 
   alias Gameoflife.Game.Seeder
-  alias Gameoflife.Game.Seed.Utils
 
   @behaviour Seeder
 
   @impl Seeder
   def default_ref_index(dimension) do
-    Utils.calc_center_center(dimension) |> left(dimension, 1)
+    calc_center_center(dimension) |> left(dimension, 1)
   end
 
   @impl Seeder
