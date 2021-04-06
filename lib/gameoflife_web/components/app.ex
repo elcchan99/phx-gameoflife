@@ -23,7 +23,8 @@ defmodule GameoflifeWeb.Components.App do
     "horizontal" => {&BoardSeed.horizontal_line_at_center/2, "Horizontal"},
     "block" => {&BoardSeed.StillLife.block_at_center/2, "Block"},
     "bee-hive" => {&BoardSeed.StillLife.bee_hive_at_center/2, "Bee Hive"},
-    "loaf" => {&BoardSeed.StillLife.loaf_at_center/2, "Loaf"}
+    "loaf" => {&BoardSeed.StillLife.loaf_at_center/2, "Loaf"},
+    "tub" => {&BoardSeed.StillLife.tub_at_center/2, "Tub"}
   }
 
   @seed_btn_cfg @seed_map

@@ -93,5 +93,21 @@ defmodule Gameoflife.Game.Seed do
 
       state |> Utils.set_indexes_state_value(indexes, :live)
     end
+
+    def tub_at_center(state, dimension) do
+      center = Utils.calc_center_center(dimension)
+      state |> tub_at(dimension, center)
+    end
+
+    def tub_at(state, d, center_index) do
+      indexes = [
+        center_index |> top(d),
+        center_index |> bottom(d),
+        center_index |> left(d),
+        center_index |> right(d)
+      ]
+
+      state |> Utils.set_indexes_state_value(indexes, :live)
+    end
   end
 end
