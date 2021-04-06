@@ -1,8 +1,6 @@
 defmodule GameoflifeWeb.Components.Cell do
   use Surface.Component
 
-  alias Gameoflife.Game.Cell, as: CellStruct
-
   @doc "HTML Class"
   prop class, :string, default: ""
 
@@ -14,7 +12,7 @@ defmodule GameoflifeWeb.Components.Cell do
 
   def render(assigns) do
     ~H"""
-    <div class="cell {{@class}} {{render_cell_state(CellStruct.get_state(@state))}}">
+    <div class="cell {{@class}} {{render_cell_state(@state)}}">
     </div>
     """
   end
