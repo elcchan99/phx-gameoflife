@@ -33,12 +33,12 @@ defmodule Gameoflife.Game.Seed do
       |> block_at(dimension, Utils.calc_center(h) * w + Utils.calc_center(w))
     end
 
-    def block_at(state, dimension, top_left_index) do
+    def block_at(state, d, top_left_index) do
       indexes = [
         top_left_index,
-        right(top_left_index, dimension),
-        bottom(top_left_index, dimension),
-        top_left_index |> bottom(dimension) |> right(dimension)
+        right(top_left_index, d),
+        bottom(top_left_index, d),
+        top_left_index |> bottom_right(d)
       ]
 
       state |> Utils.set_indexes_state_value(indexes, :live)

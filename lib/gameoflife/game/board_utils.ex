@@ -22,20 +22,29 @@ defmodule Gameoflife.Game.BoardUtils do
     |> Enum.filter(&(&1 != nil))
   end
 
-  def top(i, {w, h}) when is_integer(i) and is_inbound(i - w, w * h), do: i - w
-  def top(_, _), do: nil
-  def bottom(i, {w, h}) when is_integer(i) and is_inbound(i + w, w * h), do: i + w
-  def bottom(_, _), do: nil
+  defmemo(top(i, {w, h}) when is_integer(i) and is_inbound(i - w, w * h), do: i - w)
+  defmemo(top(_, _), do: nil)
+  defmemo(bottom(i, {w, h}) when is_integer(i) and is_inbound(i + w, w * h), do: i + w)
+  defmemo(bottom(_, _), do: nil)
 
-  def left(i, {w, h})
-      when is_integer(i) and rem(i, w) != 0 and is_inbound(i - 1, w * h),
-      do: i - 1
+  defmemo(
+    left(i, {w, h})
+    when is_integer(i) and rem(i, w) != 0 and is_inbound(i - 1, w * h),
+    do: i - 1
+  )
 
-  def left(_, _), do: nil
+  defmemo(left(_, _), do: nil)
 
-  def right(i, {w, h})
-      when is_integer(i) and rem(i + 1, w) != 0 and is_inbound(i + 1, w * h),
-      do: i + 1
+  defmemo(
+    right(i, {w, h})
+    when is_integer(i) and rem(i + 1, w) != 0 and is_inbound(i + 1, w * h),
+    do: i + 1
+  )
 
-  def right(_, _), do: nil
+  defmemo(right(_, _), do: nil)
+
+  defmemo(top_left(i, d), do: i |> top(d) |> left(d))
+  defmemo(top_right(i, d), do: i |> top(d) |> right(d))
+  defmemo(bottom_left(i, d), do: i |> bottom(d) |> left(d))
+  defmemo(bottom_right(i, d), do: i |> bottom(d) |> right(d))
 end
