@@ -1,9 +1,8 @@
 defmodule Gameoflife.Game.Seed do
   alias Gameoflife.Game.BoardUtils
 
-  def empty() do
-    %{}
-  end
+  def empty(_, _, _), do: empty()
+  def empty(), do: %{}
 
   defmodule Utils do
     def calc_center(n) when rem(n, 2) == 0, do: div(n, 2) - 1

@@ -17,6 +17,11 @@ defmodule GameoflifeWeb.Components.App do
 
   data board, :module, default: BoardStruct.new(@width, @height)
 
+  @seed_map %{
+    "horizontal" => &BoardSeed.horizontal_line_at_center/3,
+    "block" => &BoardSeed.StillLife.block_at_center/3
+  }
+
   def render(assigns) do
     ~H"""
       <div id="gameoflife">
@@ -56,6 +61,5 @@ defmodule GameoflifeWeb.Components.App do
      |> assign(board: BoardStruct.new(board.width, board.height, seed_fn(command)))}
   end
 
-  defp seed_fn("horizontal"), do: &BoardSeed.horizontal_line_at_center/3
-  defp seed_fn("block"), do: &BoardSeed.StillLife.block_at_center/3
+  defp seed_fn(key), do: Map.get(@seed_map, key, &BoardSeed.empty/3)
 end
