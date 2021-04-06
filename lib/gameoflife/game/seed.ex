@@ -17,32 +17,6 @@ defmodule Gameoflife.Game.Seed do
   defmodule StillLife do
     alias Utils
 
-    def bee_hive_at_center(state, dimension) do
-      center = Utils.calc_center_center(dimension)
-      left_most = center |> left(dimension, 1)
-      state |> bee_hive_at(dimension, left_most)
-    end
-
-    def bee_hive_at(state, d, left_most_index) do
-      top_bar = [
-        left_most_index |> top_right(d),
-        left_most_index |> top_right(d) |> right(d)
-      ]
-
-      bottom_bar = top_bar |> Enum.map(fn i -> i |> bottom(d) |> bottom(d) end)
-
-      indexes =
-        [
-          left_most_index,
-          top_bar,
-          bottom_bar,
-          left_most_index |> right(d, 3)
-        ]
-        |> List.flatten()
-
-      state |> Utils.set_indexes_state_value(indexes, :live)
-    end
-
     def loaf_at_center(state, dimension) do
       center = Utils.calc_center_center(dimension)
       left_most = center |> left(dimension, 1)
