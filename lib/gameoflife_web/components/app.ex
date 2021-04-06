@@ -25,6 +25,11 @@ defmodule GameoflifeWeb.Components.App do
     """
   end
 
+  def mount(socket) do
+    socket = Surface.init(socket)
+    {:ok, socket}
+  end
+
   def handle_event(
         "command",
         %{"command" => "step"} = _params,
