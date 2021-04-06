@@ -2,6 +2,7 @@ defmodule GameoflifeWeb.Components.App do
   use Surface.LiveComponent
 
   alias Gameoflife.Game.Board, as: BoardStruct
+  alias Gameoflife.Game.Seed, as: BoardSeed
 
   alias GameoflifeWeb.Components.Board
   alias GameoflifeWeb.Components.CommandPanel
@@ -42,5 +43,17 @@ defmodule GameoflifeWeb.Components.App do
         %{assigns: %{board: board}} = socket
       ) do
     {:noreply, socket |> assign(board: BoardStruct.next(board))}
+  end
+
+  def handle_event(
+        "command",
+        %{"command" => "horizontal"} = _params,
+        %{assigns: %{board: board}} = socket
+      ) do
+    {:noreply,
+     socket
+     |> assign(
+       board: BoardStruct.new(board.width, board.height, &BoardSeed.horizontal_line_at_middle/3)
+     )}
   end
 end

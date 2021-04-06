@@ -5,15 +5,13 @@ defmodule Gameoflife.Game.Board do
 
   defstruct width: 10, height: 20, state: nil, generation: 0
 
-  def new(width, height) do
-    mid_row = div(height, 2)
+  def new(width, height), do: new(width, height, fn x, _, _ -> x end)
 
+  def new(width, height, seed) do
     %Board{
       width: width,
       height: height,
-      # Seed.horizontal_line_at(width, mid_row)
-      # Seed.StillLife.block_at(width, 2 + mid_row * width)
-      state: Seed.empty() |> Seed.horizontal_line_at(width, mid_row),
+      state: Seed.empty() |> seed.(height, width),
       generation: 0
     }
   end
