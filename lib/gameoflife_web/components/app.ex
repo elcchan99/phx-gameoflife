@@ -56,6 +56,6 @@ defmodule GameoflifeWeb.Components.App do
      |> assign(board: BoardStruct.new(board.width, board.height, seed_fn(command)))}
   end
 
-  defp seed_fn("horizontal"), do: &BoardSeed.horizontal_line_at_middle/3
-  defp seed_fn("block"), do: &BoardSeed.StillLife.block_at_middle/3
+  defp seed_fn("horizontal"), do: &BoardSeed.horizontal_line_at_center/3
+  defp seed_fn("block"), do: &BoardSeed.StillLife.block_at_center/3
 end

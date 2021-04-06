@@ -6,12 +6,12 @@ defmodule Gameoflife.Game.Seed do
   end
 
   defmodule Utils do
-    def calc_middle(n) when rem(n, 2) == 0, do: div(n, 2) - 1
-    def calc_middle(n), do: div(n, 2)
+    def calc_center(n) when rem(n, 2) == 0, do: div(n, 2) - 1
+    def calc_center(n), do: div(n, 2)
   end
 
-  def horizontal_line_at_middle(state, width, height) do
-    mid_row = Utils.calc_middle(height)
+  def horizontal_line_at_center(state, width, height) do
+    mid_row = Utils.calc_center(height)
 
     state
     |> horizontal_line_at(width, mid_row)
@@ -26,9 +26,9 @@ defmodule Gameoflife.Game.Seed do
   defmodule StillLife do
     alias Utils
 
-    def block_at_middle(state, width, height) do
+    def block_at_center(state, width, height) do
       state
-      |> block_at(width, height, Utils.calc_middle(height) * width + Utils.calc_middle(width))
+      |> block_at(width, height, Utils.calc_center(height) * width + Utils.calc_center(width))
     end
 
     def block_at(state, w, h, top_left_index) do
