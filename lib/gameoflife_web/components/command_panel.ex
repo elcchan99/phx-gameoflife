@@ -6,15 +6,18 @@ defmodule GameoflifeWeb.Components.CommandPanel do
   @doc "Triggers on click"
   prop on_command_click, :event
 
+  @doc "Config of seed buttons"
+  prop seeds, :map
+
   def render(assigns) do
     ~H"""
       <div class="command-panel">
-        <div class="start">
+        <div class="seed">
           <h4>Seeds</h4>
-          <ButtonSeed on_click={{ @on_command_click }} name="Horizontal" seed="horizontal"/>
-          <ButtonSeed on_click={{ @on_command_click }} name="Block" seed="block"/>
-          <ButtonSeed on_click={{ @on_command_click }} name="Bee Hive" seed="bee-hive"/>
-          <ButtonSeed on_click={{ @on_command_click }} name="Loaf" seed="loaf"/>
+          <ButtonSeed on_click={{ @on_command_click }}
+            :for={{ {seed, name} <- @seeds }}
+            name={{name}}
+            seed={{seed}}/>
         </div>
         <div class="action">
           <h4>Actions</h4>

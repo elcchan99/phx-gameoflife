@@ -18,11 +18,16 @@ defmodule GameoflifeWeb.Components.App do
   data board, :module, default: BoardStruct.new(@width, @height)
 
   @seed_map %{
-    "horizontal" => &BoardSeed.horizontal_line_at_center/2,
-    "block" => &BoardSeed.StillLife.block_at_center/2,
-    "bee-hive" => &BoardSeed.StillLife.bee_hive_at_center/2,
-    "loaf" => &BoardSeed.StillLife.loaf_at_center/2
+    "horizontal" => {&BoardSeed.horizontal_line_at_center/2, "Horizontal"},
+    "block" => {&BoardSeed.StillLife.block_at_center/2, "Block"},
+    "bee-hive" => {&BoardSeed.StillLife.bee_hive_at_center/2, "Bee Hive"},
+    "loaf" => {&BoardSeed.StillLife.loaf_at_center/2, "Loaf"}
   }
+
+  @seed_btn_cfg @seed_map
+                |> Enum.reduce(%{}, fn {key, {_, name}}, acc -> Map.put(acc, key, name) end)
+
+  prop seeds, :map, default: @seed_btn_cfg
 
   def render(assigns) do
     ~H"""
@@ -34,7 +39,8 @@ defmodule GameoflifeWeb.Components.App do
         <div class="sider">
           <InfoPanel generation={{@board.generation}}/>
           <CommandPanel
-            on_command_click="command"/>
+            on_command_click="command"
+            seeds={{@seeds}}/>
         </div>
       </div>
     """
@@ -63,5 +69,8 @@ defmodule GameoflifeWeb.Components.App do
      |> assign(board: BoardStruct.new(board.width, board.height, seed_fn(command)))}
   end
 
-  defp seed_fn(key), do: Map.get(@seed_map, key, &BoardSeed.empty/2)
+  defp seed_fn(key) do
+    {func, _} = Map.get(@seed_map, key, {&BoardSeed.empty/2, ""})
+    func
+  end
 end
