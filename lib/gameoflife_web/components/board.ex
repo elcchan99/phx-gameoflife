@@ -6,6 +6,8 @@ defmodule GameoflifeWeb.Components.Board do
   @doc "board state"
   prop value, :module, required: true
 
+  prop debug, :boolean, default: false
+
   def render(assigns) do
     ~H"""
       <div class="board">
@@ -14,7 +16,8 @@ defmodule GameoflifeWeb.Components.Board do
             :for={{ col_index <- 0..@value.width-1}}
             class="col-{{col_index}}"
             index={{row_index * @value.width + col_index}}
-            state={{cell_at(@value.state, row_index * @value.width + col_index)}}/>
+            state={{cell_at(@value.state, row_index * @value.width + col_index)}}
+            debug={{@debug}}/>
         </div>
       </div>
     """

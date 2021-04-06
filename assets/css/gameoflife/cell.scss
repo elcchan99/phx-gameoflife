@@ -5,6 +5,7 @@
 
   width: 1rem;
   height: 1rem;
+  font-size: 0.33rem;
 
   // border: 1px solid black;
   border-top: 1px solid $board-layout-color;
@@ -16,6 +17,7 @@
 
   &.live {
     background: black;
+    color: white;
   }
   &.dead {
     background: transparent;

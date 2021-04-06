@@ -13,6 +13,7 @@ defmodule GameoflifeWeb.Components.App do
 
   prop width, :number, default: @width
   prop height, :number, default: @height
+  prop debug, :boolean, default: true
 
   data board, :module, default: BoardStruct.new(@width, @height)
 
@@ -21,7 +22,7 @@ defmodule GameoflifeWeb.Components.App do
       <div id="gameoflife">
         <h1>Game of Life</h1>
         <div class="board-wrapper center">
-          <Board value={{@board}}/>
+          <Board value={{@board}} debug={{@debug}}/>
         </div>
         <div class="sider">
           <InfoPanel generation={{@board.generation}}/>

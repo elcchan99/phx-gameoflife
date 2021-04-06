@@ -10,9 +10,13 @@ defmodule GameoflifeWeb.Components.Cell do
   @doc "Cell state"
   prop state, :module, required: true
 
+  @doc "Debug: toggle cell index display"
+  prop debug, :boolean, default: false
+
   def render(assigns) do
     ~H"""
     <div class="cell {{@class}} {{render_cell_state(@state)}}">
+      <span :if={{@debug}}>{{@index}}</span>
     </div>
     """
   end
