@@ -1,6 +1,7 @@
 defmodule GameoflifeWeb.Components.App do
   use Surface.LiveComponent
 
+  alias Gameoflife.Game.BoardAgent
   alias Gameoflife.Game.Board, as: BoardStruct
 
   alias GameoflifeWeb.Components.Board
@@ -23,6 +24,9 @@ defmodule GameoflifeWeb.Components.App do
   prop debug, :boolean, default: true
 
   data board, :module, default: BoardStruct.new(@width, @height)
+
+  prop timer_interval, :number, default: 500
+  data timer, :string, default: nil
 
   @seed_map %{
     "horizontal" => HorizontalLineSeed,
@@ -64,15 +68,36 @@ defmodule GameoflifeWeb.Components.App do
 
   def mount(socket) do
     socket = Surface.init(socket)
+    %{assigns: %{board: board}} = socket
+    BoardAgent.start_link(board)
     {:ok, socket}
   end
 
   def handle_event(
         "command",
         %{"command-group" => "action", "command" => "step"} = _params,
-        %{assigns: %{board: board}} = socket
+        socket
       ) do
-    {:noreply, socket |> assign(board: BoardStruct.next(board))}
+    send(self(), :step)
+    {:noreply, socket}
+  end
+
+  def handle_event(
+        "command",
+        %{"command-group" => "action", "command" => "auto"} = _params,
+        %{assigns: %{timer_interval: interval}} = socket
+      ) do
+    {:ok, timer} = :timer.send_interval(interval, self(), :step)
+    {:noreply, socket |> assign(timer: timer)}
+  end
+
+  def handle_event(
+        "command",
+        %{"command-group" => "action", "command" => "stop"} = _params,
+        %{assigns: %{timer: timer}} = socket
+      ) do
+    :timer.cancel(timer)
+    {:noreply, socket |> assign(timer: nil)}
   end
 
   def handle_event(
@@ -80,9 +105,9 @@ defmodule GameoflifeWeb.Components.App do
         %{"command-group" => "seed", "command" => command} = _params,
         %{assigns: %{board: board}} = socket
       ) do
-    {:noreply,
-     socket
-     |> assign(board: BoardStruct.new(board.width, board.height, seed_fn(command)))}
+    board = BoardStruct.new(board.width, board.height, seed_fn(command)) |> BoardAgent.reset()
+
+    {:noreply, socket |> assign(board: board)}
   end
 
   defp seed_fn(key) do
