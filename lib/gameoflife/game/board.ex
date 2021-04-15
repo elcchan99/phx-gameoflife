@@ -22,7 +22,7 @@ defmodule Gameoflife.Game.Board do
   def next_state(%Board{width: w, height: h}, state) do
     state
     # expand with neighbour indexes
-    |> Enum.flat_map(fn {i, _} -> BoardUtils.neighbours_of(i, {w, h}) end)
+    |> Stream.flat_map(fn {i, _} -> BoardUtils.neighbours_of(i, {w, h}) end)
     # count neighbour occurances
     |> Enum.frequencies()
     # filter live neighbours
