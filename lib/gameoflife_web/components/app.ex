@@ -16,12 +16,12 @@ defmodule GameoflifeWeb.Components.App do
   alias Gameoflife.Game.Seed.Oscillator, as: OscillatorSeed
   alias Gameoflife.Game.Seed.Spaceship, as: SpaceshipSeed
 
-  @width 60
-  @height 30
+  @width 100
+  @height 70
 
   prop width, :number, default: @width
   prop height, :number, default: @height
-  prop debug, :boolean, default: true
+  prop debug, :boolean, default: false
 
   data board, :module, default: BoardStruct.new(@width, @height)
 
