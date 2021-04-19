@@ -76,9 +76,9 @@ defmodule GameoflifeWeb.Components.App do
   def handle_event(
         "command",
         %{"command-group" => "action", "command" => "clear"} = _params,
-        %{assigns: %{board: board}} = socket
+        socket
       ) do
-    {:noreply, socket |> assign(board: initiate_board(board.width, board.height))}
+    {:noreply, socket |> assign(board: initiate_board(@width, @height))}
   end
 
   def handle_event(
