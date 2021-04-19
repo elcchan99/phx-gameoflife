@@ -13,7 +13,7 @@ defmodule GameoflifeWeb.Components.Board do
 
   def render(assigns) do
     ~H"""
-      <div class="board">
+      <div class="board" id="board" phx-hook="mouse_drag_hook">
         <div class="row row-{{row_index}}" :for={{ row_index <- 0..@value.height-1 }}>
           <Cell
             :for={{ col_index <- 0..@value.width-1}}
