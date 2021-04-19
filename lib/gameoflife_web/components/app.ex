@@ -70,7 +70,7 @@ defmodule GameoflifeWeb.Components.App do
     socket = Surface.init(socket)
     %{assigns: %{board: board}} = socket
     BoardAgent.start_link(board)
-    {:ok, socket}
+    {:ok, socket |> assign(board: BoardAgent.value())}
   end
 
   def handle_event(
