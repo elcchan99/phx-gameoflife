@@ -42,4 +42,26 @@ defmodule Gameoflife.Game.Board do
       end
     end)
   end
+
+  def toggle_position(%Board{state: state} = board, index) do
+    %Board{board | state: toogle_position_state(state, index), generation: 0}
+  end
+
+  defp toogle_position_state(state, index) when not is_list(index),
+    do: toogle_position_state(state, [index])
+
+  defp toogle_position_state(state, []), do: state
+
+  defp toogle_position_state(state, [index | indexes]) do
+    state =
+      case Map.get(state, index, :dead) do
+        :live -> set_position_state(state, index, :dead)
+        :dead -> set_position_state(state, index, :live)
+      end
+
+    toogle_position_state(state, indexes)
+  end
+
+  defp set_position_state(state, index, :live), do: Map.put(state, index, :live)
+  defp set_position_state(state, index, :dead), do: Map.delete(state, index)
 end

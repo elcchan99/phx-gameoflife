@@ -54,7 +54,7 @@ defmodule GameoflifeWeb.Components.App do
       <div id="gameoflife">
         <h1>Game of Life</h1>
         <div class="board-wrapper center">
-          <Board value={{@board}} debug={{@debug}}/>
+          <Board value={{@board}} debug={{@debug}} on_cell_click="cell-click"/>
         </div>
         <div class="sider">
           <InfoPanel generation={{@board.generation}}/>
@@ -116,7 +116,14 @@ defmodule GameoflifeWeb.Components.App do
     {:noreply, socket |> assign(board: initiate_board(board.width, board.height, command))}
   end
 
-    {:noreply, socket |> assign(board: board)}
+  def handle_event(
+        "cell-click",
+        %{"index" => index} = _params,
+        socket
+      ) do
+    {:noreply,
+     socket
+     |> assign(board: BoardAgent.toggle(String.to_integer(index)))}
   end
 
   defp seed_fn(key) do

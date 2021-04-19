@@ -13,9 +13,14 @@ defmodule GameoflifeWeb.Components.Cell do
   @doc "Debug: toggle cell index display"
   prop debug, :boolean, default: false
 
+  @doc "Triggers on click"
+  prop on_click, :event
+
   def render(assigns) do
     ~H"""
-    <div class="cell {{@class}} {{render_cell_state(@state)}}">
+    <div class="cell {{@class}} {{render_cell_state(@state)}}"
+      :on-click={{ @on_click }}
+      phx-value-index={{@index}}>
       <span :if={{@debug}}>{{@index}}</span>
     </div>
     """

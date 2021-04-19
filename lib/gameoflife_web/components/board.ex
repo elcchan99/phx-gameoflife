@@ -4,9 +4,12 @@ defmodule GameoflifeWeb.Components.Board do
   alias GameoflifeWeb.Components.Cell
 
   @doc "board state"
-  prop value, :module, required: true
+  prop value, :struct, required: true
 
   prop debug, :boolean, default: false
+
+  @doc "Triggers on cell click"
+  prop on_cell_click, :event
 
   def render(assigns) do
     ~H"""
@@ -17,14 +20,14 @@ defmodule GameoflifeWeb.Components.Board do
             class="col-{{col_index}}"
             index={{row_index * @value.width + col_index}}
             state={{cell_at(@value.state, row_index * @value.width + col_index)}}
-            debug={{@debug}}/>
+            debug={{@debug}}
+            on_click={{@on_cell_click}}/>
         </div>
       </div>
     """
   end
 
   defp cell_at(state, index) do
-    state
-    |> Map.get(index, :dead)
+    state |> Map.get(index, :dead)
   end
 end

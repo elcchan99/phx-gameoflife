@@ -4,19 +4,37 @@ defmodule Gameoflife.Game.BoardAgent do
   alias Gameoflife.Game.Board
 
   def start_link(initial_value) do
-    Agent.start_link(fn -> initial_value end, name: __MODULE__)
+    Agent.start_link(
+      fn -> set_state(initial_value) end,
+      name: __MODULE__
+    )
+  end
+
+  defp set_state(value) do
+    %{
+      current: value,
+      next: Board.next(value)
+    }
   end
 
   def value do
-    Agent.get(__MODULE__, & &1)
+    %{current: current} = Agent.get(__MODULE__, & &1)
+    current
   end
 
   def reset(board) do
-    Agent.update(__MODULE__, fn _ -> board end)
-    next()
+    Agent.update(__MODULE__, fn _ -> set_state(board) end)
+    value()
   end
 
   def next do
-    Agent.get_and_update(__MODULE__, fn board -> {board, Board.next(board)} end)
+    %{next: next} =
+      Agent.get_and_update(__MODULE__, fn %{next: next} = state -> {state, set_state(next)} end)
+
+    next
+  end
+
+  def toggle(index) do
+    value() |> Board.toggle_position(index) |> reset()
   end
 end

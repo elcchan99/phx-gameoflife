@@ -11,6 +11,11 @@
   border-top: 1px solid $board-layout-color;
   border-left: 1px solid $board-layout-color;
 
+  cursor: pointer;
+  &:hover {
+    box-shadow: inset 0 0 2px 2px red;
+  }
+
   &:first-child {
     border-left-width: 0;
   }
