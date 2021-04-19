@@ -22,6 +22,9 @@ defmodule GameoflifeWeb.Components.CommandPanel do
           <h4>Actions</h4>
           <button :on-click={{ @on_command_click }}
             phx-value-command-group="action"
+            phx-value-command="clear">Clear</button>
+          <button :on-click={{ @on_command_click }}
+            phx-value-command-group="action"
             phx-value-command="step">Step</button>
           <button :on-click={{ @on_command_click }}
             phx-value-command-group="action"

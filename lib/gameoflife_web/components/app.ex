@@ -75,6 +75,14 @@ defmodule GameoflifeWeb.Components.App do
 
   def handle_event(
         "command",
+        %{"command-group" => "action", "command" => "clear"} = _params,
+        %{assigns: %{board: board}} = socket
+      ) do
+    {:noreply, socket |> assign(board: initiate_board(board.width, board.height))}
+  end
+
+  def handle_event(
+        "command",
         %{"command-group" => "action", "command" => "step"} = _params,
         socket
       ) do
@@ -105,7 +113,8 @@ defmodule GameoflifeWeb.Components.App do
         %{"command-group" => "seed", "command" => command} = _params,
         %{assigns: %{board: board}} = socket
       ) do
-    board = BoardStruct.new(board.width, board.height, seed_fn(command)) |> BoardAgent.reset()
+    {:noreply, socket |> assign(board: initiate_board(board.width, board.height, command))}
+  end
 
     {:noreply, socket |> assign(board: board)}
   end
@@ -115,5 +124,9 @@ defmodule GameoflifeWeb.Components.App do
       nil -> fn _, _ -> %{} end
       seed -> &Seeder.apply(seed, &1, &2)
     end
+  end
+
+  defp initiate_board(width, height, seed_key \\ "") do
+    BoardStruct.new(width, height, seed_fn(seed_key)) |> BoardAgent.reset()
   end
 end
